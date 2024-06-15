@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login and Signup Page</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1b1f38;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    max-width: 400px;
+    padding: 30px;
+    background: #252a48;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #fff;
+    position: relative; /* For positioning warning messages */
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #6c63ff;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #6c63ff;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #1b1f38;
+    color: #ccc;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #6c63ff;
+    color: #fff;
+  }
+  
+  .btn {
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #574fdc;
+  }
+  
+  .toggle-form {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  .toggle-form a {
+    color: #6c63ff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .warning {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff6b6b;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .show-warning {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+  }
+  
+  .shake {
+    animation: shake 0.6s cubic-bezier(.36,.07,.19,.97);
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="loginForm">
+  <h2>Login</h2>
+  <div class="form-group">
+    <label for="loginUsername">Username</label>
+    <input type="text" id="loginUsername" placeholder="Enter your username">
+  </div>
+  <div class="form-group">
+    <label for="loginPassword">Password</label>
+    <input type="password" id="loginPassword" placeholder="Enter your password">
+  </div>
+  <button class="btn" onclick="login()">Login</button>
+  <p class="toggle-form">Don't have an account? <a href="#" onclick="showSignupForm()">Sign up here</a></p>
+  <div id="loginWarning" class="warning">Invalid username or password</div>
+</div>
+
+<div class="container" id="signupForm" style="display: none;">
+  <h2>Sign Up</h2>
+  <div class="form-group">
+    <label for="signupUsername">Username</label>
+    <input type="text" id="signupUsername" placeholder="Choose a username">
+  </div>
+  <div class="form-group">
+    <label for="signupPassword">Password</label>
+    <input type="password" id="signupPassword" placeholder="Choose a password">
+  </div>
+  <button class="btn" onclick="signup()">Sign Up</button>
+  <p class="toggle-form">Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+  <div id="signupWarning" class="warning">Username already taken</div>
+</div>
+
+<script>
+  function showSignupForm() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'block';
+  }
+
+  function showLoginForm() {
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+  }
+
+  function login() {
+    var username = document.getElementById('loginUsername').value;
+    var password = document.getElementById('loginPassword').value;
+
+    // Basic validation
+    if (username === '' || password === '') {
+      showWarningMessage('loginWarning', 'Please enter both username and password.');
+      return;
+    }
+
+    // Mock authentication (replace with actual authentication logic)
+    if (username === 'admin' && password === 'password') {
+      alert('Login successful!');
+      resetWarnings();
+      // Redirect or do something on successful login
+    } else {
+      showWarningMessage('loginWarning', 'Invalid username or password.');
+    }
+  }
+
+  function signup() {
+    var username = document.getElementById('signupUsername').value;
+    var password = document.getElementById('signupPassword').value;
+
+    // Basic validation
+    if (username === '' || password === '') {
+      showWarningMessage('signupWarning', 'Please enter both username and password.');
+      return;
+    }
+
+    // Mock signup logic (you can save the new user in a database or perform other actions)
+    // For demonstration, assume username 'admin' is already taken
+    if (username === 'admin') {
+      showWarningMessage('signupWarning', 'Username already taken.');
+    } else {
+      alert('Signup successful for username: ' + username);
+      resetWarnings();
+      // Optionally, clear the signup form after successful signup
+      document.getElementById('signupUsername').value = '';
+      document.getElementById('signupPassword').value = '';
+    }
+  }
+
+  function showWarningMessage(elementId, message) {
+    var warningElement = document.getElementById(elementId);
+    warningElement.textContent = message;
+    warningElement.classList.add('shake', 'show-warning');
+    setTimeout(function() {
+      warningElement.classList.remove('shake');
+    }, 600);
+    setTimeout(function() {
+      warningElement.classList.remove('show-warning');
+    }, 3000);
+  }
+
+  function resetWarnings() {
+    var warningElements = document.querySelectorAll('.warning');
+    warningElements.forEach(function(element) {
+      element.textContent = '';
+      element.classList.remove('shake', 'show-warning');
+    });
+  }
+</script>
+
+</body>
+</html>
