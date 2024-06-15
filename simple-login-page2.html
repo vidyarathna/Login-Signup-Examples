@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login and Signup Page</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    max-width: 400px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .btn {
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #574fdc;
+  }
+  
+  .toggle-form {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .toggle-form a {
+    color: #6c63ff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="loginForm">
+  <h2>Login</h2>
+  <div class="form-group">
+    <label for="loginUsername">Username</label>
+    <input type="text" id="loginUsername" placeholder="Enter your username">
+  </div>
+  <div class="form-group">
+    <label for="loginPassword">Password</label>
+    <input type="password" id="loginPassword" placeholder="Enter your password">
+  </div>
+  <button class="btn" onclick="login()">Login</button>
+  <p class="toggle-form">Don't have an account? <a href="#" onclick="showSignupForm()">Sign up here</a></p>
+</div>
+
+<div class="container" id="signupForm" style="display: none;">
+  <h2>Sign Up</h2>
+  <div class="form-group">
+    <label for="signupUsername">Username</label>
+    <input type="text" id="signupUsername" placeholder="Choose a username">
+  </div>
+  <div class="form-group">
+    <label for="signupPassword">Password</label>
+    <input type="password" id="signupPassword" placeholder="Choose a password">
+  </div>
+  <button class="btn" onclick="signup()">Sign Up</button>
+  <p class="toggle-form">Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+</div>
+
+<script>
+  function showSignupForm() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'block';
+  }
+
+  function showLoginForm() {
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+  }
+
+  function login() {
+    var username = document.getElementById('loginUsername').value;
+    var password = document.getElementById('loginPassword').value;
+
+    // Basic validation
+    if (username === '' || password === '') {
+      alert('Please enter both username and password.');
+      return;
+    }
+
+    // Mock authentication (replace with actual authentication logic)
+    if (username === 'admin' && password === 'password') {
+      alert('Login successful!');
+      // Redirect or do something on successful login
+    } else {
+      alert('Invalid username or password. Please try again.');
+    }
+  }
+
+  function signup() {
+    var username = document.getElementById('signupUsername').value;
+    var password = document.getElementById('signupPassword').value;
+
+    // Basic validation
+    if (username === '' || password === '') {
+      alert('Please enter both username and password.');
+      return;
+    }
+
+    // Mock signup logic (you can save the new user in a database or perform other actions)
+    alert('Signup successful for username: ' + username);
+    // Optionally, clear the signup form after successful signup
+    document.getElementById('signupUsername').value = '';
+    document.getElementById('signupPassword').value = '';
+  }
+</script>
+
+</body>
+</html>
+
+
