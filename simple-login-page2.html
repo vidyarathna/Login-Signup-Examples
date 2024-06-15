@@ -16,8 +16,8 @@
   }
   
   .container {
-    max-width: 400px;
-    padding: 30px;
+    width: 320px;
+    padding: 40px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -40,14 +40,21 @@
     color: #666;
     font-size: 14px;
     font-weight: bold;
+    text-transform: uppercase;
   }
   
   .form-group input {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #6c63ff;
   }
   
   .btn {
@@ -159,5 +166,3 @@
 
 </body>
 </html>
-
-
